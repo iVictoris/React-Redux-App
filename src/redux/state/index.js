@@ -1,13 +1,6 @@
 export const state = {
-  activity: {
-    previous: [],
-    current: {
-      accessibility: null,
-      activity: null,
-      id: null,
-      participants: null,
-      price: null,
-      type: null
-    },
-  }
+  isFetching: null,
+  previous: [],
+  current: null,
+  errors: null 
 }
