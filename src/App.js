@@ -1,16 +1,26 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
 
-import './App.css';
-
+import "./App.css";
+import View from "./components/View";
+import { connect } from "react-redux";
+import {getActivity} from './redux/actions/creators'
+  
 // boredapi.com
-const App = () => {
-  axios.get('http://www.boredapi.com/api/activity/').then(console.log).catch((e) => console.log('get went wrong'));
+const App = (props) => {
   return (
     <div className="App">
-      hi
+      <View />
+      <button type='button'
+        onClick={() => {
+          props.getActivity()
+        }}
+      >Get Activity</button>
     </div>
   );
+};
+
+const mapStateToProps = (state) => {
+  return {...state};
 }
 
-export default App;
+export default connect(mapStateToProps, {getActivity})(App);
