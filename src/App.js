@@ -3,24 +3,33 @@ import React from "react";
 import "./App.css";
 import View from "./components/View";
 import { connect } from "react-redux";
-import {getActivity} from './redux/actions/creators'
-  
+import { getActivity } from "./redux/actions/creators";
+import Activity from "./components/Activity/Activity";
+
+import './less/index.less';
+
 // boredapi.com
-const App = (props) => {
+const App = props => {
+  const {current} = props;
   return (
     <div className="App">
       <View />
-      <button type='button'
+      <button
+        type="button"
         onClick={() => {
-          props.getActivity()
+          props.getActivity();
         }}
-      >Get Activity</button>
+      >
+        Get Activity
+      </button>
+
+      {!!current && <Activity />}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {...state};
-}
+const mapStateToProps = ({current}) => {
+  return { ...current };
+};
 
-export default connect(mapStateToProps, {getActivity})(App);
+export default connect(mapStateToProps, { getActivity })(App);
