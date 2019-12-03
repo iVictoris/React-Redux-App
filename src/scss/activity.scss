@@ -3,10 +3,29 @@
     display: flex;
     flex-flow: column;
     align-items: center;
+    margin: 2%;
+    padding: 1%;
+    justify-content: space-evenly;
   }
 
   &.Card {
     margin: 1% auto;
+  }
+
+  h4 {
+    font-size: 1.35rem;
+    font-weight: bolder;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  header {
+    margin: 3%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
   }
 }
 
@@ -14,13 +33,14 @@
   display: flex;
   flex-flow: wrap;
   & .Card {
-    @include boxShadow($error)
+    @include boxShadow($error);
+    color: $error;
   }
 
   h2 {
     border-top: 1px solid #000;
     padding-top: 2%;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bolder;
     width: 100%;
   }

@@ -3,13 +3,30 @@
   width: 23%;
   display: flex;
   flex-flow: column wrap;
-  padding: 2% 1%;
+  padding: 4% 1%;
   margin: 1%;
+  background: rgb(78, 78, 78);
+  background: linear-gradient(
+    50deg,
+    rgba(78, 78, 78, 1) 0%,
+    rgba(198, 198, 198, 1) 14%,
+    rgba(246, 246, 246, 1) 25%,
+    rgba(185, 182, 182, 1) 36%,
+    rgba(236, 235, 235, 1) 45%,
+    rgba(149, 149, 149, 1) 56%,
+    rgba(226, 226, 226, 1) 69%,
+    rgba(111, 111, 111, 1) 83%,
+    rgba(255, 255, 255, 1) 95%
+  );
+  color: $pink;
+  font-weight: bolder;
+  text-shadow: -.5px -.5px 0 white, .5px -.5px 0 white, -.5px .5px 0 white,
+    .5px .5px 0 white;
 
   border-top: $border-shade-dark 3px solid;
   border-right: $border-shade-light 3px solid;
   border-bottom: $border-shade-dark 3px solid;
   border-left: $border-shade-light 3px solid;
-  
-  @include boxShadow($light-blue);
+
+  @include boxShadow($pink);
 }
