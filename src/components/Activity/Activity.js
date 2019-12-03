@@ -53,7 +53,7 @@ const Activity = ({current, className = 'Activity'}) => {
       <section>
         <p>Particpants: {generateIcons('people', participants)}</p>
         <p>Price: {generateIcons('money', price)}</p>
-        <p>Type: {type}</p>
+        <p>Type: <span>{type}</span></p>
 
       </section>
     </section>
