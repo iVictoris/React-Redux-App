@@ -1,31 +1,28 @@
-const createNewState = (initialState, { err, isFetching, activityIds }) => {
-  const state = {
-    ...initialState,
+const createNewState = (state, { err, isFetching }) => ({
+  state: {
+    ...state,
     err,
-    isFetching,
-    activityIds
+    isFetching
+  }
+});
+
+const moveCurrentToPrevious = clonedState => {
+  const { current, previous } = clonedState;
+  if (!current) return { state: clonedState};
+  return {
+    state: { ...clonedState, previous: [current, ...previous] }
   };
-
-  return state;
 };
 
-const moveCurrentToPrevious = initialState => {
-  const state = { ...initialState };
-  const { current } = state;
-  if (current) state.previous.push(state.current);
-  return state;
+const addCurrentActivity = (state, nextProps) => {
+  const { current } = nextProps;
+  const { activityIds } = state;
+  return {
+    state: { ...state, current, activityIds: [current.key, ...activityIds] }
+  };
 };
 
-const addNewCurrentActivity = (initialState, nextState) => {
-  const state = { ...initialState };
-  const { current } = nextState;
-  moveCurrentToPrevious(state);
-  state.current = current;
-  const newState = createNewState(state, { ...nextState, isFetching: false });
-  return newState;
-};
-
-export const replaceCurrentActivity = (
+export const addActivity = (
   state = {
     current: null,
     previous: [],
@@ -33,20 +30,31 @@ export const replaceCurrentActivity = (
     err: null,
     isFetching: true
   },
-  nextState = { current: null, err: "" }
+  nextProps = { current: null, err: "" }
 ) => {
-  const { activityIds } = state;
-  const { current, err } = nextState;
-  const nextActivityIdState = [current.key, ...activityIds];
+  /*
+   * This function receives the state and the nextProps
+   * Take initial state, clone,
+   * check if there's a current activity
+   * if there is, move into previous
+   * add new activity
+   * */
 
-  // if curent isn't null, add to previous array
-  const newState = addNewCurrentActivity(state, {
-    current,
-    activityIds: nextActivityIdState,
-    err
+  const clonedState = { ...state };
+  const { state: updatedPreviousState } = moveCurrentToPrevious(
+    clonedState
+  );
+
+  const { current, err } = nextProps;
+  const {
+    state: updatedActivityState
+  } = addCurrentActivity(updatedPreviousState, { current });
+  const { state: finalState } = createNewState(updatedActivityState, {
+    err,
+    isFetching: false
   });
 
-  return newState;
+  return finalState;
 };
 
 export const checkId = (id, state) => {
