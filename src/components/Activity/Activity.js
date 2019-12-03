@@ -59,9 +59,4 @@ const Activity = ({current, className = 'Activity'}) => {
     </section>
   )
 }
-
-const mapStateToProps = ({current}) => ({
-  current
-})
-
-export default connect(mapStateToProps, {})(Activity)
+export default Activity
