@@ -1,0 +1,7 @@
+.Activity {
+  &>section>p {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+}
