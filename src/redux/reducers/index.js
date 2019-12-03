@@ -6,7 +6,7 @@ import {
   FETCH_API_SUCCESS
 } from "../actions/index";
 
-import { replaceCurrentActivity, checkId } from "./helper";
+import { addActivity, checkId } from "./helper";
 
 export const reducer = (initialState = state, action) => {
   let newState;
@@ -23,7 +23,7 @@ export const reducer = (initialState = state, action) => {
 
       if (isInvalidId) return initialState;
       // get previousCurrent and place into previous
-      const newStateActivities = replaceCurrentActivity(initialState, {
+      const newStateActivities = addActivity(initialState, {
         current: action.payload
       });
       // add key to list of Ids for easier filtering
@@ -31,12 +31,10 @@ export const reducer = (initialState = state, action) => {
       newState = {
         ...newStateActivities
       };
-
       return newState;
 
     case FETCH_API_FAIL:
-      console.log("Fetching completed with error");
-      const newErrorState = replaceCurrentActivity(initialState, {
+      const newErrorState = addActivity(initialState, {
         err: action.payload
       });
       newState = {
