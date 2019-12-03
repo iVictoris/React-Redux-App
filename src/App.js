@@ -19,7 +19,7 @@ const App = props => {
           props.getActivity();
         }}
       >
-        Get Activity
+        Help me I'm bored
       </button>
       {!current && <p>No Activities, click the button above</p>}
       {!!current && <CurrentActivityCard />}
