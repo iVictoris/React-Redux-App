@@ -57,13 +57,14 @@ const Activity = ({ current, className = "Activity" }) => {
       </header>
       <section>
         <p>
-          Particpants: <span>{generateIcons("people", participants)}</span>
+          <span>Participants:</span>{" "}
+          <span>{generateIcons("people", participants)}</span>
         </p>
         <p>
-          Price: <span>{generateIcons("money", price)}</span>
+          <span>Price:</span> <span>{generateIcons("money", price)}</span>
         </p>
         <p>
-          Type: <span>{type}</span>
+          <span>Type:</span> <span>{type}</span>
         </p>
       </section>
     </section>
