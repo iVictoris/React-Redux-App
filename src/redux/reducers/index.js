@@ -36,6 +36,7 @@ export const reducer = (initialState = state, action) => {
       return newState;
 
     case FETCH_API_SUCCESS:
+      console.log('Fetching complete successfully')
       // get previousCurrent and place into previous
       const newStateActivities = replaceCurrentActivity(
         initialState,
@@ -47,6 +48,7 @@ export const reducer = (initialState = state, action) => {
       return newState;
 
     case FETCH_API_FAIL:
+      console.log('Fetching completed with error')
       const newErrorState = replaceCurrentActivity(initialState, {
         err: action.payload
       });
