@@ -1,19 +1,17 @@
 import React from "react";
 
 import "./App.css";
-import View from "./components/View";
 import { connect } from "react-redux";
 import { getActivity } from "./redux/actions/creators";
-import Activity from "./components/Activity/Activity";
+import ActivityCard from "./components/Activity/ActivityCard";
 
-import './less/index.less';
+import './scss/index.scss';
 
 // boredapi.com
 const App = props => {
   const {current} = props;
   return (
     <div className="App">
-      <View />
       <button
         type="button"
         onClick={() => {
@@ -22,14 +20,13 @@ const App = props => {
       >
         Get Activity
       </button>
-
-      {!!current && <Activity />}
+      {!!current && <ActivityCard />}
     </div>
   );
 };
 
-const mapStateToProps = ({current}) => {
-  return { ...current };
+const mapStateToProps = state => {
+  return { ...state };
 };
 
 export default connect(mapStateToProps, { getActivity })(App);
