@@ -6,49 +6,36 @@ import {
   FETCH_API_SUCCESS
 } from "../actions/index";
 
-const replaceCurrentActivity = (
-  state = { current: null, previous: [] },
-  nextState = { nextCurrent: null, err: "" }
-) => {
-  const { previous, current } = state;
-  const { nextActivity, err } = nextState;
-  // if curent isn't null, add to previous array
-  const newPrevious = [...previous];
-  if (current) newPrevious.push(current);
-  const newState = {
-    ...state,
-    previous: newPrevious,
-    current: nextActivity,
-    err,
-    isFetching: false
-  };
-
-  return newState;
-};
+import { replaceCurrentActivity, checkId } from "./helper";
 
 export const reducer = (initialState = state, action) => {
   let newState;
   switch (action.type) {
     // fetch reducer
     case FETCH_API_START:
-      console.log("Fetching start");
       newState = { ...initialState, isFetching: true, err: "" };
       return newState;
 
     case FETCH_API_SUCCESS:
-      console.log('Fetching complete successfully')
+      const oldState = { ...initialState };
+      const { key } = action.payload;
+      const isInvalidId = checkId(key, oldState);
+
+      if (isInvalidId) return initialState;
       // get previousCurrent and place into previous
-      const newStateActivities = replaceCurrentActivity(
-        initialState,
-        {nextActivity: action.payload}
-      );
+      const newStateActivities = replaceCurrentActivity(initialState, {
+        current: action.payload
+      });
+      // add key to list of Ids for easier filtering
+
       newState = {
         ...newStateActivities
       };
+
       return newState;
 
     case FETCH_API_FAIL:
-      console.log('Fetching completed with error')
+      console.log("Fetching completed with error");
       const newErrorState = replaceCurrentActivity(initialState, {
         err: action.payload
       });
