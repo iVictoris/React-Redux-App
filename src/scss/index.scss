@@ -1,0 +1,10 @@
+// Import reset, variables, globals, mixins
+@import 'reset';
+@import 'variables';
+@import 'globals';
+@import 'mixins';
+
+// imported component styles
+@import 'app';
+@import 'card';
+@import 'activity';
